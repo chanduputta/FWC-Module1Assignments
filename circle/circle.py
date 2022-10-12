@@ -49,10 +49,13 @@ teeta = np.arccos(d/(q*r))
 
 teetadeg = np.degrees(teeta)
 #print( teetadeg)
+teetainv = 360 - teetadeg
 
 degP = teetadeg/2
+degPinv =  teetainv/2
 print("------------------solution--------------------------------")
-print ("Angle QPR of given triangle is :",int(degP),"degrees.")
+print ("Angle QPR of inscribed triangle is :",int(degP),"degrees.")
+print ("Angle QP'R of inscribed triangle is :",int(degPinv),"degrees.")
 print("--------------------------------------------------------------")
 
 ########################ploting############
@@ -65,6 +68,7 @@ R =  np.array(([3,4])) #given vector
 r = 5
 O = np.zeros(2)
 P =  np.array(([0,-5])) # imaginary point on circle
+p = np.array(([0,5])) ## inverse triangle point on circle
 ##Generating the circle
 x_circ= circ_gen(O,r)
 
@@ -74,7 +78,8 @@ xOR = line_gen(O,R)
 xOQ = line_gen(O,Q)
 xPR = line_gen(P,Q)
 xPQ = line_gen(P,R)
-
+xpR = line_gen(p,R)
+xpQ = line_gen(p,Q)
 
 #Plotting all lines
 plt.plot(xQR[0,:],xQR[1,:],label='givenChord')
@@ -82,7 +87,8 @@ plt.plot(xOR[0,:],xOR[1,:],"r-")
 plt.plot(xOQ[0,:],xOQ[1,:],"r-",label='QOR = 90deg')
 plt.plot(xPR[0,:],xPR[1,:],'-.',color="green")
 plt.plot(xPQ[0,:],xPQ[1,:],'-.',color="green",label='QPR = 45deg')
-
+plt.plot(xpR[0,:],xpR[1,:],'--',color="purple")
+plt.plot(xpQ[0,:],xpQ[1,:],'--',color="purple",label="QP'R= 135deg")
 
 
 #Plotting the circle
@@ -90,9 +96,9 @@ plt.plot(x_circ[0,:],x_circ[1,:],label='Circle')
 
 
 #Labeling the coordinates
-tri_coords = np.vstack((O,Q,R,P)).T
+tri_coords = np.vstack((O,Q,R,P,p)).T
 plt.scatter(tri_coords[0,:], tri_coords[1,:])
-vert_labels = ['O','Q','R','P']
+vert_labels = ['O','Q','R','P',"P'"]
 for i, txt in enumerate(vert_labels):
     plt.annotate(txt, # this is the text
                  (tri_coords[0,i], tri_coords[1,i]), # this is the point to label
