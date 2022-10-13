@@ -26,6 +26,7 @@ from conics.funcs import circ_gen
 # given points on coordinates as vectors
 Q = np.array([3,4])
 R = np.array([-4,3])
+
 O = np.zeros(2)
 N1 = norm_vec(O,Q)
 #print(N1)
@@ -45,28 +46,28 @@ r = np.sqrt(np.dot(R,R))
 #print (r)
 #print (d/q*r)
 
-teeta = np.arccos(d/(q*r))
+teeta = np.arccos(d/(q*r)) 
 
-teetadeg = np.degrees(teeta)
+teetadeg = int(np.degrees(teeta)) # angle QOR
 #print( teetadeg)
-teetainv = 360 - teetadeg
+teetainv = 360 - teetadeg #sudo angle QOR
 
-degP = teetadeg/2
-degPinv =  teetainv/2
+degP = int(teetadeg/2) # angle QPR
+degPinv =  int(teetainv/2) # angle QP'R
 print("------------------solution--------------------------------")
-print ("Angle QPR of inscribed triangle is :",int(degP),"degrees.")
-print ("Angle QP'R of inscribed triangle is :",int(degPinv),"degrees.")
+print ("Angle QPR of inscribed triangle PQR is :",degP,"degrees. where P is on major Arc")
+print ("Angle QP'R of inscribed triangle P'QR is :",degPinv,"degrees. where P' is on minor Arc")
 print("--------------------------------------------------------------")
 
 ########################ploting############
 
 #Input parameters
-Q =  np.array(([-4,3])) #given vector
-R =  np.array(([3,4])) #given vector
+#Q
+#R
 
 #Circle parameters
 r = 5
-O = np.zeros(2)
+#O = np.zeros(2)
 P =  np.array(([0,-5])) # imaginary point on circle
 p = np.array(([0,5])) ## inverse triangle point on circle
 ##Generating the circle
@@ -76,19 +77,20 @@ x_circ= circ_gen(O,r)
 xQR = line_gen(Q,R)
 xOR = line_gen(O,R)
 xOQ = line_gen(O,Q)
-xPR = line_gen(P,Q)
-xPQ = line_gen(P,R)
+xPR = line_gen(P,R)
+xPQ = line_gen(P,Q)
 xpR = line_gen(p,R)
 xpQ = line_gen(p,Q)
+
 
 #Plotting all lines
 plt.plot(xQR[0,:],xQR[1,:],label='givenChord')
 plt.plot(xOR[0,:],xOR[1,:],"r-")
-plt.plot(xOQ[0,:],xOQ[1,:],"r-",label='QOR = 90deg')
+plt.plot(xOQ[0,:],xOQ[1,:],"r-",label='QOR = {}deg'.format(teetadeg))
 plt.plot(xPR[0,:],xPR[1,:],'-.',color="green")
-plt.plot(xPQ[0,:],xPQ[1,:],'-.',color="green",label='QPR = 45deg')
+plt.plot(xPQ[0,:],xPQ[1,:],'-.',color="green",label='QPR_majorArc = {}deg'.format(degP))
 plt.plot(xpR[0,:],xpR[1,:],'--',color="purple")
-plt.plot(xpQ[0,:],xpQ[1,:],'--',color="purple",label="QP'R= 135deg")
+plt.plot(xpQ[0,:],xpQ[1,:],'--',color="purple",label="QP'R_minorArc= {}deg".format(degPinv))
 
 
 #Plotting the circle
