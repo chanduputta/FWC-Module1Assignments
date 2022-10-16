@@ -1,0 +1,162 @@
+\documentclass[journal,12pt,twocolumn]{article}
+\usepackage{graphicx}
+\graphicspath{{./figs/}}{}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{gensymb}
+\newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
+\let\vec\mathbf
+\title{
+Matrix-Conic
+}
+\author{SHREYASH CHANDRA PUTTA}
+\begin{document}
+\maketitle
+\tableofcontents
+\bigskip
+\section{Problem Statement}
+To find the locus of mid point of $\overline{PQ}$ where $\vec{P}$ is $\myvec{ 1\\0}$ and $\vec{Q}$ is a point on the locus $y^{2} = 8x$ .
+%\section{}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+       \hline
+       \textbf{Symbol}&\textbf{Value}&\textbf{Description}  \\
+       \hline
+	    $\vec{P}$ & $\myvec{
+		    1\\
+		    0}$
+	    & given point\\
+        \hline
+	    $\vec{Q}$ & $\myvec{x'\\y'}$
+ &  point on given locus \\
+ 
+        \hline
+	    $\vec{X}$ & $\myvec{x\\y}$
+ & mid point of $\overline{PQ}$  \\
+       \hline
+ %       a + b & 9 & Given Condition\\
+%        \hline
+    \end{tabular}
+    \caption{Parameters}
+    \label{tab:my_label}
+\end{table}
+
+
+\section{Solution}
+Let $\vec{X}$ be any point on the Locus formed by the midpoint joining the point $\vec{P}$ and any point on the given locus say, point $\vec{Q}$  \\
+
+Where, 
+  ${\vec{P}}$=$\myvec{
+  1\\
+  0}$
+  ,${\vec{Q}}$=$\myvec{
+  x'\\
+  y'}$
+ and ${\vec{X}}$=$\myvec{
+  x\\
+  y}$
+
+\begin{figure}[h]
+    \centering
+\includegraphics[width=\columnwidth]{fig/conicfig.pdf}
+    \caption{Found the locus equation }
+    \label{fig:my_label}
+\end{figure}
+\vspace{0cm}
+The given equation of parabola $y^2 = 8x$ can be written in the general quadratic form as
+\begin{align}
+    \label{eq:conic_quad_form}
+    \vec{x}^{\top}\vec{V}\vec{x}+2\vec{u}^{\top}\vec{x}+f=0
+    \end{align}
+where
+\begin{align}
+	\label{eq:V_matrix}
+	\vec{V} &= \myvec{0 & 0\\0 & 1},
+	\\
+	\label{eq:u_vector}
+	\vec{u} &= \myvec{-4\\0},
+	\\
+	\label{eq:f_value}
+	f &= 0
+	%\\
+\end{align}
+\\
+Substitute $\vec{Q}$ and data in eq1 .
+\\
+\begin{align}
+    \label{eq:conic_quad_form}
+    \vec{Q}^{\top}\vec{V}\vec{Q}+2\vec{u}^{\top}\vec{Q}=0
+    \end{align}
+
+By section formula
+mid point of line joining $\vec{P}$ and $\vec{Q}$ as $\vec{X}$ is:
+ 
+ \begin{equation}
+	\vec{X}=\frac{\vec{Q}+\vec{P}}{2}
+	 \label{eq-4}
+\end{equation}
+\\
+ \begin{equation}
+	\vec{Q}=2\vec{X}-\vec{P}
+	 \label{eq-4}
+\end{equation}
+\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+From eq5 and eq7 We get 
+\\
+
+\begin{multline}
+    (2\vec{X}-\vec{P})^{\top}\vec{V}(2\vec{X}-\vec{P})\\+2\vec{u}^{\top}(2\vec{X}-\vec{P})=0
+     \label{eq-5}
+    \end{multline}
+
+\begin{multline}
+    \label{eq:conic_quad_form}
+    (2\vec{X}^{\top}\vec{V}-\vec{P}^{\top}\vec{V})(2\vec{X}-\vec{P})\\+2\vec{u}^{\top}2\vec{X}-2\vec{u}^{\top}\vec{P}=0
+    \end{multline}
+
+\begin{multline}
+    \label{eq:conic_quad_form}
+    (2\vec{X}^{\top}\vec{V}2\vec{X}-2\vec{X}^{\top}\vec{V}\vec{P})\\+2\vec{u}^{\top}2\vec{X}-2\vec{u}^{\top}\vec{P}=0
+    \end{multline}
+    
+\begin{multline}
+    \label{eq:conic_quad_form}
+    4\vec{X}^{\top}\vec{V}\vec{X}+4\vec{u}^{\top}\vec{X}+8=0
+    \end{multline}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Therefore, required Locus equation of the mid point of given point $\vec{P}$ and $\vec{Q}$ is obtained as:
+\begin{multline}
+    \label{eq:conic_quad_form}
+    \vec{X}^{\top}\vec{V}\vec{X}+\vec{u}^{\top}\vec{X}+2=0
+    \end{multline}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\section{Software}
+Download the following code using,
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|}
+    \hline \\
+         svn co https://github.com/chanduputta/\\FWC-Module1Assignments/blob/\\main/conic/code/conic.py \\
+         \\
+\hline
+    \end{tabular}
+\end{table}
+\\
+and execute the code by using command
+\begin{center}
+\textbf{cmd:}Python3  conic.py
+\\
+\end{center}
+
+\section{Conclusion}
+\begin{center}
+We found the locus of mid point of $\overline{PQ}$ where $\vec{P}$ is $\myvec{ 1\\0}$ and $\vec{Q}$ is a point on the locus $y^{2} = 8x$ as $y^{2} = 4x - 2$.
+\end{center}
+\end{document}
