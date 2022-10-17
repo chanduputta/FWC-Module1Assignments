@@ -1,0 +1,179 @@
+\documentclass[journal,12pt,twocolumn]{article}
+\usepackage{graphicx}
+\graphicspath{{./figs/}}{}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{gensymb}
+\newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
+
+\let\vec\mathbf
+
+\title{
+Matrix-Circle
+}
+\author{SHREYASH CHANDRA PUTTA}
+\begin{document}
+\maketitle
+\tableofcontents
+\bigskip
+\section{Problem Statement}
+To find angle QPR of the triangle PQR which is inscribed in the circle $x^2 + y^2 = 25$. If Q and R  have  co-ordinates (3,4) and (-4,3) respectively .
+%\section{}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+       \hline
+       \textbf{Symbol}&\textbf{Value}&\textbf{Description}  \\
+       \hline
+	    $\vec{Q}$ & $\myvec{
+		    3\\
+		    4}$
+	    & given point\\
+        \hline
+	    $\vec{R}$ & $\myvec{-4\\3}$
+ & given point\\
+        \hline
+	    $\vec{P}$ & $\myvec{0\\-5}$
+ & A point on circle  \\
+       \hline
+ %       a + b & 9 & Given Condition\\
+%        \hline
+    \end{tabular}
+    \caption{Parameters}
+    \label{tab:my_label}
+\end{table}
+
+\begin{figure}[h]
+    \centering
+\includegraphics[width=\columnwidth]{fig/circirclefig.pdf}
+    \caption{triangle inscribed in Circle and its angle QPR }
+    \label{fig:my_label}
+\end{figure}
+\vspace{2cm}
+\section{Solution}
+Given that Points given are on the circle forms an inscribed triangle forms by joining the points (3,4),(-4,3) and any point on the given circle   \\
+%so, b = 9 - a  \\
+\\
+Let ${\vec{Q}}$=$\myvec{
+  3\\
+  4}$
+  ,${\vec{R}}$=$\myvec{
+  -4\\
+  3}$
+ and ${\vec{P}}$=$\myvec{
+  0\\
+  -5}$
+\\
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The direction vector of the line joining two points A, B is given by
+\\
+
+\begin{equation}
+	\vec{m}=
+     \vec{B}-  \vec{A}
+  \label{eq-1}
+\end{equation}
+\\
+From eq1 we get dirction vectors of ${\vec{Q},\vec{O}}$ and ${\vec{R},\vec{O}}$ as m1 and m2 respectively 
+\\
+\begin{equation}
+	\vec{m1}=
+     \myvec{
+  3\\
+  4
+ }-  \myvec{
+  0\\
+  -5
+ }= \myvec{3\\9}
+  \label{eq-2}
+\end{equation}
+\\
+\begin{equation}
+	\vec{m2}=
+     \myvec{
+  -4\\
+  3
+ }- \myvec{0\\-5} = \myvec{-4\\8}
+   \label{eq-3}
+\end{equation}
+\\
+\\
+We know,
+The normal vector to direction vector is defined by:
+\\
+\begin{equation}
+\vec{m^{\top}}\vec{n} = 0.
+  \label{eq-4}
+\end{equation} 
+\\
+From eq4 and eq2 weget
+ \\
+ \begin{equation}
+	\myvec{3\ \ 9}
+     \vec{n1}= 0
+  \label{eq-5}
+\end{equation}
+\\
+by eq5 we can cansider :
+\begin{equation}	
+     \vec{n1}= \myvec{-9\\ 3}
+  \label{eq-6}
+\end{equation}  
+\\
+From eq4 and eq3 weget
+\begin{equation}
+	\myvec{-4\ \ 8}
+     \vec{n2} = 0
+   \label{eq-7}
+\end{equation}
+\\
+by solving eq7 we consider :
+\begin{equation}	
+     \vec{n2}= \myvec{8\\ 4}
+  \label{eq-8}
+\end{equation}  
+\\
+
+The angle between two vectors is given by
+\begin{equation}
+\theta = {cos}^{-1}\frac{\vec{n1^{\top}} \vec{n2}}{\vec{\|n1\| \|n2\|}}
+   \label{eq-9}
+\end{equation}
+By substituting $\vec{n1} \:and\: \vec{n2} $ we get
+\begin{equation}
+ \measuredangle{QPR} = 45\degree
+  \label{eq-10}
+\end{equation}
+\\
+
+where,$ \vec{P} $ is a random point on the given circle
+\\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\section{Software}
+Download the following code using,
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|}
+    \hline \\
+         svn co https://github.com/chanduputta/\\FWC-Module1Assignments/blob/\\main/circle/circle.py  \\
+         \\
+\hline
+    \end{tabular}
+\end{table}
+\\
+and execute the code by using command
+\begin{center}
+\textbf{Python3  circle.py}
+\\
+\end{center}
+
+\section{Conclusion}
+\begin{center}
+We found the  $ \measuredangle{QPR} $ of the $\triangle{PQR}$ which is inscribed in the circle $x^2 + y^2 = 25$. Where P is any point on the circle as $45\degree$.
+\end{center}
+\end{document}
