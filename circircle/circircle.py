@@ -1,39 +1,23 @@
-#Code by Shreyash Chandra (works on termux)
-#October 11, 2022
-#License
-#https://www.gnu.org/licenses/gpl-3.0.en.html
-#To find the angle |_QPR of thriangle inscribed in the circle x2 + y2 = 25 if Q and R coordinates are (3,4) & (-4,3) respectively . 
-
-
-#Python libraries for math and graphics
-import numpy as np
-import matplotlib.pyplot as plt
-from numpy import linalg as LA
-from math import *
-import sys  #for path to external scripts
-sys.path.insert(0,'/home/shreyash/Desktop/matrix/gvv/cbse-papers/CoordGeo')         #path to my scripts
-
-#local imports
-from line.funcs import *
-from triangle.funcs import *
-from conics.funcs import circ_gen
-
-#if using termux
-import subprocess
-import shlex
 #end if
- 
-# given points on coordinates as vectors
+
+# given points on circle as vectors of a circle 
 Q = np.array([3,4])
 R = np.array([-4,3])
 
-P = np.array([0,-5]) # considering random point on circle
-#N1 = norm_vec(P,Q)
-N1 =dir_vec(P,Q)
-#print(N1)
-#N2 = norm_vec(P,R)
-N2 = dir_vec(P,R)
-#print (N2)
+# given circle parameters 
+O = np.zeros(2) #center of circle
+r = 5 #LA.norm(Q-O)#radius 
+
+
+P = np.array([0,-r]) # considering random point on circle
+
+#normal vectors
+N1 = norm_vec(P,Q)
+#N1 =dir_vec(P,Q)
+print(N1)
+N2 = norm_vec(P,R)
+#N2 = dir_vec(P,R)
+print (N2)
 
 
 #TThe angle between two vectors is given by
@@ -53,7 +37,7 @@ teeta = np.arccos(d/(n1*n2))
 teetadeg = int(np.degrees(teeta)) # angle QOR
 
 print("------------------solution--------------------------------")
-print ("Angle QPR of inscribed triangle PQR is :",teetadeg,"degrees.")
+print ("Measured the \N{MEASURED ANGLE} QPR of inscribed triangle PQR is = {}\N{DEGREE SIGN}.".format(teetadeg))
 print("where P{} is randomly picked point on major Arc".format(P))
 
 print("--------------------------------------------------------------")
@@ -81,9 +65,9 @@ xPQ = line_gen(P,Q)
 
 
 #Plotting all lines
-plt.plot(xQR[0,:],xQR[1,:],'-g',label='givenChord')
-plt.plot(xPR[0,:],xPR[1,:],color="green")
-plt.plot(xPQ[0,:],xPQ[1,:],color="green",label='angle_QPR = {}deg'.format(teetadeg))
+plt.plot(xQR[0,:],xQR[1,:],'-g',label='lineSegmant-QR')
+plt.plot(xPR[0,:],xPR[1,:],'--',color="green")
+plt.plot(xPQ[0,:],xPQ[1,:],'--',color="green",label='\N{MEASURED ANGLE}QPR = {}$^\circ$'.format(teetadeg))
 #plt.plot(xpR[0,:],xpR[1,:],'--',color="purple")
 #plt.plot(xpQ[0,:],xpQ[1,:],'--',color="purple",label="QP'R_minorArc= {}deg".format(degPinv))
 
@@ -117,4 +101,3 @@ plt.axis('equal')
 #subprocess.run(shlex.split("termux-open /storage/emulated/0/github/#school/ncert-vectors/defs/figs/cbse-10-20.pdf"))
 #else
 plt.show()
-
