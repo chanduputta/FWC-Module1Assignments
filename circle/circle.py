@@ -1,5 +1,5 @@
 #Code by Shreyash Chandra (works on termux)
-#October 11, 2022
+#October 25s, 2022
 #License
 #https://www.gnu.org/licenses/gpl-3.0.en.html
 #To find the angle |_QPR of thriangle inscribed in the circle x2 + y2 = 25 if Q and R coordinates are (3,4) & (-4,3) respectively . 
@@ -9,6 +9,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy import linalg as LA
+import math
 from math import *
 import sys  #for path to external scripts
 sys.path.insert(0,'/home/shreyash/Desktop/matrix/gvv/cbse-papers/CoordGeo')         #path to my scripts
@@ -22,75 +23,65 @@ from conics.funcs import circ_gen
 #import subprocess
 #import shlex
 #end if
- 
+
+
 # given points on coordinates as vectors
 Q = np.array([3,4])
 R = np.array([-4,3])
 
-O = np.zeros(2)
-N1 = norm_vec(O,Q)
-#print(N1)
-N2 = norm_vec(O,R)
-#print (N2)
+#Circle parameters from given eqn --> X^T X + 2u^T X + f  = 0
+u = -np.zeros(2)
+f = -25
 
+#we get
+O =  -u #center of circle
+r = int(np.sqrt(np.dot(u,u)-f))  #LA.norm(Q-O) .........radius(-f) 
 
-#TThe angle between two vectors is given by
-#θ = cos−1(#A⊤ B/∥A∥ ∥B∥)
+# To take random point on circle
+n = int(input("Input an angle alpha[0 to 360] to generate a point on circle:"))#99
+alpha = np.radians(n)
+#print(alpha,"alpha")
+x =r*np.cos(alpha)
+y=r*np.sin(alpha)
+P = np.array([x,y])
+#print(P,"random point P")
+check = np.linalg.norm(P)
+#print(check,"= 5 or not")
+N1 = dir_vec(P,Q)
+#print(N1,"norm_vec1")
+N2 = dir_vec(P,R)
+#print (N2,"norm_vec2")
+
+#The angle between two vectors is given by
+#θ = cos^−1(#A^⊤B/∥A∥ ∥B∥)
+
 d = np.dot(N1,N2)
-#print(d)
+n1 = np.linalg.norm(N1)
+n2 = np.linalg.norm(N2)
+teeta = np.arccos(d/(n1*n2))
 
-q = np.sqrt(np.dot(Q,Q))
-#print (q)
+degP = int(np.degrees(teeta)) # angle QPR
 
-r = np.sqrt(np.dot(R,R))
-#print (r)
-#print (d/q*r)
 
-teeta = np.arccos(d/(q*r)) 
-
-teetadeg = int(np.degrees(teeta)) # angle QOR
-#print( teetadeg)
-teetainv = 360 - teetadeg #sudo angle QOR
-
-degP = int(teetadeg/2) # angle QPR
-degPinv =  int(teetainv/2) # angle QP'R
 print("------------------solution--------------------------------")
-print ("Angle QPR of inscribed triangle PQR is :",degP,"degrees. where P is on major Arc")
-print ("Angle QP'R of inscribed triangle P'QR is :",degPinv,"degrees. where P' is on minor Arc")
+print ("Measured the \N{MEASURED ANGLE} QPR of inscribed triangle PQR is = {}\N{DEGREE SIGN}.".format(degP))
+print("where vertex P is {} on circle".format(P))
 print("--------------------------------------------------------------")
 
 ########################ploting############
 
-#Input parameters
-#Q
-#R
-
-#Circle parameters
-r = 5
-#O = np.zeros(2)
-P =  np.array(([0,-5])) # imaginary point on circle
-p = np.array(([0,5])) ## inverse triangle point on circle
 ##Generating the circle
 x_circ= circ_gen(O,r)
 
 ##Generating all lines
 xQR = line_gen(Q,R)
-xOR = line_gen(O,R)
-xOQ = line_gen(O,Q)
 xPR = line_gen(P,R)
 xPQ = line_gen(P,Q)
-xpR = line_gen(p,R)
-xpQ = line_gen(p,Q)
-
 
 #Plotting all lines
-plt.plot(xQR[0,:],xQR[1,:],label='givenChord')
-plt.plot(xOR[0,:],xOR[1,:],"r-")
-plt.plot(xOQ[0,:],xOQ[1,:],"r-",label='QOR = {}deg'.format(teetadeg))
-plt.plot(xPR[0,:],xPR[1,:],'-.',color="green")
-plt.plot(xPQ[0,:],xPQ[1,:],'-.',color="green",label='QPR_majorArc = {}deg'.format(degP))
-plt.plot(xpR[0,:],xpR[1,:],'--',color="purple")
-plt.plot(xpQ[0,:],xpQ[1,:],'--',color="purple",label="QP'R_minorArc= {}deg".format(degPinv))
+plt.plot(xQR[0,:],xQR[1,:],'--',color="green",label='side QR')
+plt.plot(xPR[0,:],xPR[1,:],color="green")
+plt.plot(xPQ[0,:],xPQ[1,:],color="green",label='\N{MEASURED ANGLE}QPR = {}$^\circ$'.format(degP))
 
 
 #Plotting the circle
@@ -98,9 +89,9 @@ plt.plot(x_circ[0,:],x_circ[1,:],label='Circle')
 
 
 #Labeling the coordinates
-tri_coords = np.vstack((O,Q,R,P,p)).T
+tri_coords = np.vstack((O,Q,R,P)).T
 plt.scatter(tri_coords[0,:], tri_coords[1,:])
-vert_labels = ['O','Q','R','P',"P'"]
+vert_labels = ['O','Q','R','P']
 for i, txt in enumerate(vert_labels):
     plt.annotate(txt, # this is the text
                  (tri_coords[0,i], tri_coords[1,i]), # this is the point to label
@@ -113,6 +104,7 @@ for i, txt in enumerate(vert_labels):
 plt.xlabel('$x$')
 plt.ylabel('$y$')
 plt.legend(loc='best')
+plt.title('plot of an inscribed triangle PQR')
 plt.grid() # minor
 plt.axis('equal')
 
