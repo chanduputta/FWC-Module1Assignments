@@ -1,30 +1,50 @@
 \documentclass[journal,12pt,twocolumn]{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[cmex10]{amsmath}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{booktabs}
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
 \graphicspath{{./figs/}}{}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{gensymb}
 \newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
 
 \let\vec\mathbf
-
-\title{
-Matrix-Circle
-}
+\title{Matrix-Circle}
 \author{SHREYASH CHANDRA PUTTA}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\abs}[1]{\left\vert#1\right\vert}
+\let\vec\mathbf
+%\newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
+\newcommand{\mydet}[1]{\ensuremath{\begin{vmatrix}#1\end{vmatrix}}}
+\providecommand{\brak}[1]{\ensuremath{\left(#1\right)}}
 \begin{document}
 \maketitle
 \tableofcontents
 \bigskip
 \section{Problem Statement}
 To find angle QPR of the triangle PQR which is inscribed in the circle $x^2 + y^2 = 25$. If Q and R  have  co-ordinates (3,4) and (-4,3) respectively .
-%\section{}
-
-\begin{table}[h]
+\section{Construction}
+ {\begin{table}[h]
     \centering
     \begin{tabular}{|c|c|c|}
        \hline
        \textbf{Symbol}&\textbf{Value}&\textbf{Description}  \\
        \hline
+       $\vec{O}$ & $\myvec{
+		    0\\
+		    0}$
+	    & Center point\\
+        \hline
+        $\vec{r}$ & 5
+	    & Radius\\
+        \hline
 	    $\vec{Q}$ & $\myvec{
 		    3\\
 		    4}$
@@ -33,179 +53,140 @@ To find angle QPR of the triangle PQR which is inscribed in the circle $x^2 + y^
 	    $\vec{R}$ & $\myvec{-4\\3}$
  & given point\\
         \hline
-	    $\vec{O}$ & $\myvec{0\\0}$
- & center of given circle  \\
+	    $\vec{P}$ & $\myvec{rcos(\alpha)\\
+  rsin(\alpha)}$
+ & user defined point \\
        \hline
- %       a + b & 9 & Given Condition\\
-%        \hline
     \end{tabular}
     \caption{Parameters}
     \label{tab:my_label}
-\end{table}
-
+\end{table}}
+ %%%%%%%%%%%
 \begin{figure}[h]
     \centering
-\includegraphics[width=\columnwidth]{fig/cirfig.pdf}
+\includegraphics[width=\columnwidth]{fig/circlesfig.pdf}
     \caption{triangle inscribed in Circle and its angle QPR }
     \label{fig:my_label}
 \end{figure}
-\vspace{2cm}
+\vspace{0cm}
+%%%%%%%%%%%%%%%%%%%%%%solution%%%%%%%%%%%%%%%%%%
 \section{Solution}
-Given that Points given are on the circle forms an inscribed triangle forms by joining the points (3,4),(-4,3) and any point on the given circle   \\
-%so, b = 9 - a  \\
-\\
-Let ${\vec{Q}}$=$\myvec{
-  3\\
-  4}$
-  ,${\vec{R}}$=$\myvec{
-  -4\\
-  3}$
- and ${\vec{O}}$=$\myvec{
-  0\\
-  0}$
-\\
-\\
-Given equation of circle is ${\vec{x^{\top}}\vec{I}\vec{\ x}} = 25$.
-\\
+Given that Points given are on the circle forms an inscribed triangle the points $\vec{Q}$, $\vec{R}$ and any point$\vec{P}$ on the given circle   \\
 
+The circle given,
+ \begin{align}
+    \label{eq:conic_quad_form}
+    \vec{x}^{\top}\vec{x}=25
+ \end{align}
+From General Equation:
+\begin{align}
+    \label{eq:conic_quad_form}
+    \vec{x}^{\top}\vec{x}+2\vec{u}^{\top}\vec{x}+f=0
+    \end{align}
+    
+where
+\begin{align}
+	\label{eq:u_vector}
+	\vec{u} &= -\myvec{0\\0},
+	\\
+	\label{eq:f_value}
+	f &= -25	
+\end{align}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The direction vector of the line joining two points A, B is given by
+Centre and Radius of given circle are :
+\begin{align}
+	\label{eq:V_matrix}
+	\vec{O} = -\vec{u} = \myvec{0\\0}\\
+	r = \sqrt{\vec{u}^{\top}\vec{u}-f} = 5
+	 \label{eq-7} 
+\end{align}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \\
-
+Point on the circle should satisfy the circle equation so, we take 
+\begin{align}
+\vec{P}=\myvec{rcos(\alpha)\\
+  rsin(\alpha)}\\
+ \vec{Q}=\myvec{3\\
+  4}\\
+   \vec{R}=\myvec{-4\\
+  3}
+\end{align}
+\\
+Considering $\vec{P}$,$\vec{Q}$and $\vec{R}$ as the Coordinates of the Inscribed Triangle
+\\
+\\
+We know,
+The direction vector of the line joining two points $\vec{A}$, $\vec{B}$ is given by
 \begin{equation}
 	\vec{m}=
      \vec{B}-  \vec{A}
-  \label{eq-1}
+  \label{eq-11}
 \end{equation}
-\\
-From eq1 we get dirction vectors of ${\vec{Q},\vec{O}}$ and ${\vec{R},\vec{O}}$ as m1 and m2 respectively 
+From eq11 we get dirction vectors of $\overline{\vec{P}\vec{Q}}$ as $\vec{m1}$ i.e
 \\
 \begin{equation}
-	\vec{m1}=
-     \myvec{
-  3\\
-  4
- }-  \myvec{
-  0\\
-  0
- }= \myvec{3\\4}
-  \label{eq-2}
+	\vec{m1}
+ = \vec{Q}-\vec{P}
+  \label{eq-12}
 \end{equation}
 \\
+From eq11 we get dirction vector of $\overline{\vec{P}\vec{R}}$ as $\vec{m2}$ i.e
 \begin{equation}
-	\vec{m2}=
-     \myvec{
-  -4\\
-  3
- }- \myvec{0\\0} = \myvec{-4\\3}
-   \label{eq-3}
+	\vec{m2}
+ = \vec{R} - \vec{P}
+   \label{eq-13}
 \end{equation}
-\\
-\\
-The normal vector to m is defined by:
-\\
-\begin{equation}
-\vec{m^{\top}}\vec{n} = 0.
-  \label{eq-4}
-\end{equation} 
-\\
-From eq4 and eq2 weget
- \\
- \begin{equation}
-	\myvec{3\ \ 4}
-     \vec{n1}= 0
-  \label{eq-5}
-\end{equation}
-\\
-by eq5 we can cansider :
-\begin{equation}	
-     \vec{n1}= \myvec{-4\\ 3}
-  \label{eq-6}
-\end{equation}  
-\\
-From eq4 and eq3 weget
-\begin{equation}
-	\myvec{-4\ \ 3}
-     \vec{n2} = 0
-   \label{eq-7}
-\end{equation}
-\\
-by solving eq7 we consider :
-\begin{equation}	
-     \vec{n2}= \myvec{3\\ 4}
-  \label{eq-8}
-\end{equation}  
 \\
 
 The angle between two vectors is given by
 \begin{equation}
-\theta = {cos}^{-1}\frac{\vec{n1^{\top}} \vec{n2}}{\vec{\|n1\| \|n2\|}}
-   \label{eq-9}
+\theta = {cos}^{-1}\frac{\vec{A^{\top}} \vec{B}}{\vec{\|A\| \|B\|}}
+   \label{eq-14}
 \end{equation}
-By substituting $\vec{n1} \:and\: \vec{n2} $ we get
+By substituting $\vec{m1} \:and\: \vec{m2} $  in eq13 we get,
+
+\subsection{Case 1: Major Arc} If $\vec{P}$ lies on major Arc of the circle for given $\vec{Q}$ and $\vec{R}$ points
 \begin{equation}
- \measuredangle{QOR} = 90\degree
-  \label{eq-10}
-\end{equation}
-\\
-\textbf{The Central Angle Theorem states that the measure of inscribed angle is always half the measure of the central angle.}\\
- \\
- 
- i.e
- \begin{equation}
- \angle{QOR} = 2\angle{QPR}
-  \label{eq-11}
-\end{equation}
-\\
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-by eq11 and eq10 \\
-\begin{equation}
-	\angle{QPR} = 45\degree
-	 \label{eq-12}
-\end{equation}
-where,$ \vec{P} $ is on major arc of the given circle
-\\
-\\
-\textbf{Additional:}
-\\
-\\
-Let $ \vec{P'} $ is any point on minor arc of the given circle 
-\\\\
-Then,
-\begin{equation}
-	 \angle{QP'R} = 180\degree - \angle{QPR}
-	 \label{eq-13}
-\end{equation}
- \\
- From eq13 and eq12
- \begin{equation}
-    \measuredangle{QP'R} = 135\degree 
+ \vec{\measuredangle{QPR}} = 45\degree
   \label{eq-14}
 \end{equation}
 
 
+
+\subsection{Case 2: Minor Arc} If $\vec{P}$ lies on minor Arc of the circle for given $\vec{Q}$ and $\vec{R}$ points.
+\begin{equation}
+ \vec{\measuredangle{QPR}} = 135\degree
+  \label{eq-15}
+\end{equation}
+
+
+where,$ \vec{P} $ is a random point on the given circle for its $\boldsymbol{\alpha}$\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Software}
 Download the following code using,
+{\setlength\extrarowheight{2pt}
 \begin{table}[h]
     \centering
     \begin{tabular}{|c|}
     \hline \\
-         svn co https://github.com/chanduputta/\\FWC-Module1Assignments/blob/\\main/circle/circle.py  \\
-         \\
+         https://github.com/chanduputta/\\FWC-Module1Assignments/blob/\\main/circle/circle.py  \\       
 \hline
     \end{tabular}
 \end{table}
-\\
-and execute the code by using command
-\begin{center}
-\textbf{Python3  circle.py}
-\\
-\end{center}
+}
+and execute the code by using command\\\\
+\centering
+\textbf{cmd1}:Python3  circle.py\\
+\textbf{cmd2}:Input your $\boldsymbol{\alpha}$ value (0 to 360\degree)
 
 \section{Conclusion}
 \begin{center}
-We found the  $ \measuredangle{QPR} $ of the $\triangle{PQR}$ which is inscribed in the circle $x^2 + y^2 = 25$. Where P is any point on the circle .
+We found the  $\vec{\measuredangle{QPR}} $ of the $\vec{\triangle{PQR}}$ which is inscribed in the circle $\vec{x^2 + y^2 = 25}$.
+\\Where $\vec{P}$ is  point on the circle as 
+\\i) $\textbf{45\degree}$, If $\vec{P}$ lies on Major Arc of Given Circle\\
+ii) $\textbf{135\degree}$, If $\vec{P}$ lies on Minor Arc of Given Circle
 \end{center}
 \end{document}
