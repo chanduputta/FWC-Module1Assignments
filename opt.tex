@@ -1,0 +1,82 @@
+\documentclass[journal,10pt,twocolumn]{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[cmex10]{amsmath}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{booktabs}
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\graphicspath{{./figs/}}{}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{gensymb}
+\newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
+\let\vec\mathbf
+\title{
+Optimization-Assignment
+}
+\author{SHREYASH CHANDRA PUTTA}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\abs}[1]{\left\vert#1\right\vert}
+\let\vec\mathbf
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+\bigskip
+\section{Problem Statement}
+If x and y are positive real numbers such that $x^2 +y^2 = 1$ then Find the maximum value of \textbf(x+y)
+
+\section{Solution}
+
+\begin{enumerate}
+
+ \item Deriving f(x): 
+ Given, equation 
+	\begin{align}
+      x^2+y^2 = 1 \label{eq:1}
+    \end{align}
+     we take $(\ref{eq:1})$ as
+    \begin{align}
+      y = \sqrt{1-x^2} \label{eq:2}
+    \end{align}
+    where, $x > 0 \: and \: y > 0$
+	\\ \\And, given conditon to find maximum of
+	\begin{align}
+          x+y \label{eq:3}
+    \end{align}
+From \ref{eq:2} and \ref{eq:3} we get, 
+  \begin{align}
+      f(x) = x+\sqrt{1-x^2} \label{eq:4}
+    \end{align}
+    \\ 
+\item For Maxima : \\
+    Using gradient ascent method,
+\begin{align}
+    x_n=x_{n-1}+\mu\frac{df(x)}{dx} \label{eq:9}
+    \end{align}
+    \begin{align}
+    \frac{df(x)}{dx}=1-\frac{x}{\sqrt{1-x^2}} \label{eq:10}
+\end{align}
+After substituting \ref{eq:10} in \ref{eq:9} we get:
+\begin{align}
+    x_n=x_{n-1}+\mu(1-\frac{x}{\sqrt{1-x^2}})\label{eq:11}
+\end{align}
+Taking $x_0 = 0.5, \mu = 0.001$ and $precision = 0.00000001$, values obtained using python are:
+\begin{align}
+\boxed{\text{Maxima} = 1.4142 \approx \sqrt{2}} \\
+\boxed{\text{Maxima Point} = 0.7071 \approx \frac{1}{\sqrt{2}}}
+\end{align}
+\end{enumerate}
+
+ \section{Plot}
+\includegraphics[width=1\columnwidth]{fig/optfig.pdf}
+
+\centering \text{Graph of f(x) = $x^2+\sqrt{1-x^2}$}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
