@@ -19,9 +19,11 @@ from conics.funcs import circ_gen
 V = np.array([[1,0],[0,1]])
 u = np.array([0,0]).reshape(2,-1)
 d = -1
-x = Variable((2,1))
 n= np.array([1,1])
-#Cost function
+
+x = Variable((2,1))
+
+#Given function
 f =  n@x
 obj = Maximize(f)
 
@@ -30,10 +32,16 @@ constraints = [quad_form(x,V) + u.T@x +d <= 0]
 
 #solution
 Problem(obj, constraints).solve()
+
+Max_value = f.value
+
+Q = x.value
+
 print("--------------solution-----------------")
-print("Maximum value of x+y is {}".format(f.value[0]) )
-print("at point X(x,y) ,where")
-print("x = {} and y = {}".format(x.value[0],x.value[1]))
+print("Maximum value of x+y is {}".format(Max_value) )
+print("at point Q({})".format(Q))
+#print("x = {} and y = {}".format(x.value[0],x.value[1]))
+print("----verified by plot-----------")
 
 ############plotting#################
 
@@ -45,21 +53,18 @@ x_circ= circ_gen(O.reshape(1,-1),r)
 #Plotting the circle
 plt.plot(x_circ[0,:],x_circ[1,:],label='Circle')
 
-#Generating the Point x
-X=x.value
-#X = np.array([0.70710678,0.70710678])
 
 #plot the points
 #plt.plot(O[0],O[1],'o')
-plt.plot(X[0],X[1],'o')#,label='X{}'.format(X.reshape(1,-1))
-plt.text(X[0], X[1],'X')
+plt.plot(Q[0],Q[1],'o',label='point Q')
+#plt.text(Q[0], Q[1])
 
 
 
 plt.xlabel('$x-axis$')
 plt.ylabel('$y-axis$')
 plt.legend(loc='best')
-plt.title('plotiing-Optimization')
+plt.title('Optimization-Plot')
 plt.grid() # minor
 plt.axis('equal')
 
@@ -70,13 +75,6 @@ plt.axis('equal')
 #school/ncert-vectors/defs/figs/cbse-10-20.pdf"))
 #else
 plt.show()
-
-
-
-
-
-
-
 
 
 
