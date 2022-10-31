@@ -86,8 +86,8 @@ Z = PyHal_GPIO_Get(31);
 W = PyHal_GPIO_Get(32);  
 
 //outputs
-A= !X&!Y&!Z;
-B= !X&!Y&Z;
+A= X || Z;
+B= Y||Z;
 
 
      decoder_setup();
